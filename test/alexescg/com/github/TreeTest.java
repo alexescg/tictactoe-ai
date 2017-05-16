@@ -16,8 +16,8 @@ public class TreeTest {
         moveTree = new Tree<>();
     }
 
-    @Test
-    public void addNode(){
-        moveTree.add(new Move(0,0, Move.Mark.CIRCLE));
-    }
+//    @Test
+//    public void addNode(){
+//        moveTree.add(new Move(0,0, Move.Mark.CIRCLE));
+//    }
 }

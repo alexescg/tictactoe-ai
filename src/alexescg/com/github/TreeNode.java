@@ -6,39 +6,44 @@ import java.util.List;
 /**
  * @author alex
  */
-public class TreeNode<T> {
-    private List<TreeNode<T>> children = new ArrayList<>();
-    private TreeNode<T> parent = null;
+class TreeNode<T> {
     private T data = null;
+    private List<TreeNode> children = new ArrayList<>();
+    private TreeNode parent = null;
 
     public TreeNode(T data) {
         this.data = data;
     }
 
-    public TreeNode(T data, TreeNode<T> parent) {
-        this.data = data;
-        this.parent = parent;
-    }
 
-    public List<TreeNode<T>> getChildren() {
-        return this.children;
-    }
-
-    public void setParent(TreeNode<T> parent) {
-        parent.addChild(this);
-        this.parent = parent;
+    public void addChild(TreeNode child) {
+        child.setParent(this);
+        this.children.add(child);
     }
 
     public void addChild(T data) {
-        TreeNode<T> child = new TreeNode<T>(data);
-        child.setParent(this);
-        this.children.add(child);
-
+        TreeNode<T> newChild = new TreeNode<>(data);
+        newChild.setParent(this);
+        children.add(newChild);
     }
 
-    public void addChild(TreeNode<T> child) {
-        child.setParent(this);
-        this.children.add(child);
+    public void addChildren(List<TreeNode> children) {
+        for (TreeNode t : children) {
+            t.setParent(this);
+        }
+        this.children.addAll(children);
+    }
+
+    public List<TreeNode> getChildren() {
+        return children;
+    }
+
+    public void setParent(TreeNode parent) {
+        this.parent = parent;
+    }
+
+    public TreeNode getParent() {
+        return parent;
     }
 
     public T getData() {
