@@ -13,44 +13,40 @@ public class TicTacToeGame {
     private int[][] board = new int[3][3];
     private boolean playerTurn = true;
     private static List<Move[]> winningCombinations = new ArrayList<>();
+
     {
         winningCombinations.add(new Move[]{
-                new Move(0,0),
-                new Move(1,1),
-                new Move(2,2)});
+                new Move(0, 0),
+                new Move(1, 1),
+                new Move(2, 2)});
         winningCombinations.add(new Move[]{
-                new Move(0,0),
-                new Move(0,1),
-                new Move(0,2)});
+                new Move(0, 0),
+                new Move(0, 1),
+                new Move(0, 2)});
         winningCombinations.add(new Move[]{
-                new Move(0,0),
-                new Move(1,0),
-                new Move(2,0)});
+                new Move(0, 0),
+                new Move(1, 0),
+                new Move(2, 0)});
         winningCombinations.add(new Move[]{
-                new Move(2,0),
-                new Move(2,1),
-                new Move(2,2)});
+                new Move(2, 0),
+                new Move(2, 1),
+                new Move(2, 2)});
         winningCombinations.add(new Move[]{
-                new Move(0,2),
-                new Move(1,2),
-                new Move(2,2)});
+                new Move(0, 2),
+                new Move(1, 2),
+                new Move(2, 2)});
         winningCombinations.add(new Move[]{
-                new Move(0,2),
-                new Move(1,1),
-                new Move(2,0)});
+                new Move(0, 2),
+                new Move(1, 1),
+                new Move(2, 0)});
         winningCombinations.add(new Move[]{
-                new Move(0,1),
-                new Move(1,1),
-                new Move(2,1)});
+                new Move(0, 1),
+                new Move(1, 1),
+                new Move(2, 1)});
         winningCombinations.add(new Move[]{
-                new Move(1,0),
-                new Move(1,1),
-                new Move(1,2)});
-    }
-    /**
-     * TicTacToe Game data structure
-     */
-    public TicTacToeGame() {
+                new Move(1, 0),
+                new Move(1, 1),
+                new Move(1, 2)});
     }
 
     /**
