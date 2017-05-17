@@ -1,18 +1,16 @@
 package alexescg.com.github;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author alex
  */
 public class TicTacToeGame {
     private Queue<Move> movementsQueue = new LinkedList<>();
-    private int[][] board = new int[3][3];
+    protected int[][] board = new int[3][3];
     private boolean playerTurn = true;
     private static List<Move[]> winningCombinations = new ArrayList<>();
+    private GameState state;
 
     {
         winningCombinations.add(new Move[]{
@@ -114,5 +112,60 @@ public class TicTacToeGame {
             }
             System.out.println();
         }
+    }
+
+    /**
+     * Check current state of the game
+     *
+     * @return current gameState
+     */
+    private GameState getState() {
+        if (this.getMovements().size() <= 5) {
+            this.state = GameState.PROGRESS;
+        } else if (this.state == GameState.PROGRESS) {
+            this.state = checkWinningCombinations();
+        } else if (isBoardFilled()) {
+            this.state = GameState.TIE;
+        } else {
+            this.state = GameState.PROGRESS;
+        }
+        return this.state;
+    }
+
+    /**
+     * Check if a winning combination is on board.
+     *
+     * @return {@link GameState}:Win if player win, Lose if player loses
+     */
+    private GameState checkWinningCombinations() {
+        for (Move[] combo : winningCombinations) {
+            int first = this.board[combo[0].x][combo[0].y];
+            int second = this.board[combo[1].x][combo[1].y];
+            int third = this.board[combo[2].x][combo[2].y];
+            if (first == second && second == third) {
+                if (playerTurn) {
+                    return GameState.WIN;
+                } else {
+                    return GameState.LOSE;
+                }
+            }
+        }
+        return GameState.PROGRESS;
+    }
+
+    /**
+     * Check if board is completely filled up
+     *
+     * @return true if board is filled, false if not
+     */
+    private boolean isBoardFilled() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
