@@ -10,7 +10,7 @@ public class TicTacToeGame {
     protected int[][] board = new int[3][3];
     private boolean playerTurn = true;
     private static List<Move[]> winningCombinations = new ArrayList<>();
-    private GameState state;
+    private GameState state = GameState.PROGRESS;
 
     {
         winningCombinations.add(new Move[]{
@@ -55,7 +55,9 @@ public class TicTacToeGame {
      */
     public void markSpace(int x, int y) {
         addMove(x, y);
-        this.playerTurn = !playerTurn;
+        if (this.getState() == GameState.PROGRESS) {
+            this.playerTurn = !playerTurn;
+        }
     }
 
     private void addMove(int x, int y) {
@@ -119,17 +121,21 @@ public class TicTacToeGame {
      *
      * @return current gameState
      */
-    private GameState getState() {
-        if (this.getMovements().size() <= 5) {
-            this.state = GameState.PROGRESS;
-        } else if (this.state == GameState.PROGRESS) {
-            this.state = checkWinningCombinations();
-        } else if (isBoardFilled()) {
-            this.state = GameState.TIE;
+    public GameState getState() {
+        if (this.state != GameState.PROGRESS) {
+            return this.state;
         } else {
-            this.state = GameState.PROGRESS;
+            if (this.getMovements().size() <= 4) {
+                this.state = GameState.PROGRESS;
+            } else if (this.state == GameState.PROGRESS) {
+                this.state = checkWinningCombinations();
+            } else if (isBoardFilled()) {
+                this.state = GameState.TIE;
+            } else {
+                this.state = GameState.PROGRESS;
+            }
+            return this.state;
         }
-        return this.state;
     }
 
     /**
@@ -159,9 +165,9 @@ public class TicTacToeGame {
      * @return true if board is filled, false if not
      */
     private boolean isBoardFilled() {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == 0) {
+        for (int[] row : board) {
+            for (int space : row) {
+                if (space == 0) {
                     return false;
                 }
             }

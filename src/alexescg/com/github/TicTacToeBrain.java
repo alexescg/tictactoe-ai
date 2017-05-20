@@ -8,11 +8,19 @@ import java.util.List;
  */
 public class TicTacToeBrain {
     private Tree<Move> moveTree;
-    private TicTacToeGame gameToLearn;
+    private TicTacToeGame currentGame;
 
 
-    public TicTacToeBrain(Tree<Move> moveTree) {
-        this.moveTree = moveTree;
+    public TicTacToeBrain() {
+        this.moveTree = new Tree<>();
+    }
+
+    public void makePlay() {
+
+    }
+
+    public void learn(TicTacToeGame gameToLearnFrom) {
+        this.moveTree.addCollection(gameToLearnFrom.getMovements());
     }
 
 }

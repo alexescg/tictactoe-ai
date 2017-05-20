@@ -4,17 +4,17 @@ package alexescg.com.github;
  * @author alex
  */
 public class Move {
-    public int x;
-    public int y;
-    public Mark mark;
+    int x;
+    int y;
+    Mark mark;
 
-    public Move(int x, int y, Mark mark) {
+    Move(int x, int y, Mark mark) {
         this.x = x;
         this.y = y;
         this.mark = mark;
     }
 
-    public Move(int x, int y) {
+    Move(int x, int y) {
         this.x = x;
         this.y = y;
     }
