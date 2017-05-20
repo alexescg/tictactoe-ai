@@ -7,6 +7,7 @@ public class Move {
     int x;
     int y;
     Mark mark;
+    GameState moveResult;
 
     Move(int x, int y, Mark mark) {
         this.x = x;
@@ -24,6 +25,8 @@ public class Move {
         return "Move{" +
                 "x=" + x +
                 ", y=" + y +
+                ", mark=" + mark +
+                ", moveResult=" + moveResult +
                 '}';
     }
 

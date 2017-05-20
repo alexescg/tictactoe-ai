@@ -17,6 +17,7 @@ public class Tree<T> {
     public void addCollection(Collection<T> collection) {
         TreeNode<T> current = root;
         for (T element : collection) {
+            System.out.println(element);
             TreeNode<T> newNode = new TreeNode<>(element);
             newNode.setParent(current);
             current.addChild(newNode);

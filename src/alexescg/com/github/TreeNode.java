@@ -10,7 +10,6 @@ class TreeNode<T> {
     private T data = null;
     private List<TreeNode> children = new ArrayList<>();
     private TreeNode parent = null;
-    private GameState result;
 
     public TreeNode(T data) {
         this.data = data;
@@ -66,9 +65,4 @@ class TreeNode<T> {
     public void removeParent() {
         this.parent = null;
     }
-
-    public void setResult(GameState gameState) {
-        this.result = gameState;
-    }
-
 }

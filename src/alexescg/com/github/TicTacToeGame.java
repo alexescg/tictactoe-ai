@@ -61,13 +61,16 @@ public class TicTacToeGame {
     }
 
     private void addMove(int x, int y) {
-        Move move = this.playerTurn
-                ? new Move(x, y, Move.Mark.CIRCLE)
-                : new Move(x, y, Move.Mark.CROSS);
-
         if (isSpaceEmpty(x, y)) {
-            movementsQueue.add(move);
+            Move move = this.playerTurn
+                    ? new Move(x, y, Move.Mark.CIRCLE)
+                    : new Move(x, y, Move.Mark.CROSS);
+
             board[x][y] = move.mark.getVal();
+            movementsQueue.add(move);
+            if (this.getState() != GameState.PROGRESS) {
+                move.moveResult = state;
+            }
         } else {
             throw new UnsupportedOperationException("Space not empty");
         }
