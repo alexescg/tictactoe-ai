@@ -12,6 +12,7 @@ public class Main {
 
         while (keepPlaying) {
             TicTacToeGame game = new TicTacToeGame();
+            ticTacToeBrain.setCurrentGame(game);
             while (game.getState() == GameState.PROGRESS) {
                 System.out.print("X Coordinate: ");
                 int x = scanner.nextInt();
@@ -19,10 +20,12 @@ public class Main {
                 int y = scanner.nextInt();
                 game.markSpace(x, y);
                 game.printBoard();
+                if (game.getState() == GameState.PROGRESS) {
+                    ticTacToeBrain.makePlay();
+                    game.printBoard();
+                }
             }
-            System.out.println("Juego terminado. Resultado: " + game.getState());
-            System.out.println("se acabo");
-
+            System.out.println("Game over. Resultado: " + game.getState());
             ticTacToeBrain.learn(game);
             keepPlaying = willKeepPlaying();
         }
