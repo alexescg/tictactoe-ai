@@ -6,7 +6,7 @@ import java.util.*;
  * @author alex
  */
 public class TicTacToeGame {
-    private Queue<Move> movementsQueue = new LinkedList<>();
+    private Deque<Move> movementsDeque = new ArrayDeque<>();
     protected int[][] board = new int[3][3];
     private boolean playerTurn = true;
     private static List<Move[]> winningCombinations = new ArrayList<>();
@@ -67,7 +67,7 @@ public class TicTacToeGame {
                     : new Move(x, y, Move.Mark.CROSS);
 
             board[x][y] = move.mark.getVal();
-            movementsQueue.add(move);
+            movementsDeque.add(move);
             if (this.getState() != GameState.PROGRESS) {
                 move.moveResult = state;
             }
@@ -92,8 +92,8 @@ public class TicTacToeGame {
      *
      * @return movements
      */
-    public Queue<Move> getMovements() {
-        return movementsQueue;
+    public Deque<Move> getMovements() {
+        return movementsDeque;
     }
 
     /**
@@ -117,6 +117,7 @@ public class TicTacToeGame {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     /**

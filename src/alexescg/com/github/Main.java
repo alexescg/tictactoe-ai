@@ -19,20 +19,21 @@ public class Main {
                 System.out.print("Y Coordinate: ");
                 int y = scanner.nextInt();
                 game.markSpace(x, y);
+                ticTacToeBrain.matchGameState();
                 game.printBoard();
                 if (game.getState() == GameState.PROGRESS) {
                     ticTacToeBrain.makePlay();
                     game.printBoard();
                 }
             }
-            System.out.println("Game over. Resultado: " + game.getState());
+            System.out.println("Game over. Result: " + game.getState());
             ticTacToeBrain.learn(game);
             keepPlaying = willKeepPlaying();
         }
     }
 
     private static boolean willKeepPlaying() {
-        System.out.println("Keep playing? y/n");
+        System.out.print("Keep playing? y/n ");
         String answer = scanner.next();
         return answer.equals("y");
     }

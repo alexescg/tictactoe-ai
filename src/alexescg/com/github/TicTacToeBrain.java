@@ -1,15 +1,15 @@
 package alexescg.com.github;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author alex
  */
 public class TicTacToeBrain {
-    private Tree<Move> moveTree;
+    private Tree<Move> moveTree = new Tree<>();
     private TicTacToeGame currentGame;
+    private TreeNode<Move> lastPlay = this.moveTree.getRoot();
+    private Random random = new Random(11);
 
 
     public TicTacToeBrain() {
@@ -17,11 +17,20 @@ public class TicTacToeBrain {
     }
 
     public void makePlay() {
-        playRandomSquare();
+        if (lastPlay != null && lastPlay.hasChildren()) {
+            System.out.println("matching game state");
+            playRandomSquare();//placeholder
+            matchGameState();
+        } else {
+            playRandomSquare();
+
+        }
+
     }
 
     public void learn(TicTacToeGame gameToLearnFrom) {
         this.moveTree.addCollection(gameToLearnFrom.getMovements());
+        this.lastPlay = this.moveTree.getRoot();
     }
 
     public void setCurrentGame(TicTacToeGame game) {
@@ -29,7 +38,6 @@ public class TicTacToeBrain {
     }
 
     private void playRandomSquare() {
-        Random random = new Random();
         int x = random.nextInt(3);
         int y = random.nextInt(3);
         if (this.currentGame.board[x][y] == 0) {
@@ -37,5 +45,17 @@ public class TicTacToeBrain {
         } else {
             playRandomSquare();
         }
+    }
+
+    public void matchGameState() {
+        if (lastPlay != null && lastPlay.hasChildren()) {
+            lastPlay = next();
+            System.out.println(lastPlay);
+        }
+    }
+
+    public TreeNode<Move> next() {
+        Move lastMove = this.currentGame.getMovements().getLast();
+        return this.lastPlay.getChild(lastMove);
     }
 }

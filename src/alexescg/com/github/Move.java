@@ -44,4 +44,26 @@ public class Move {
             return val;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Move move = (Move) o;
+
+        if (x != move.x) return false;
+        if (y != move.y) return false;
+        if (mark != move.mark) return false;
+        return moveResult == move.moveResult;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        result = 31 * result + mark.hashCode();
+        result = 31 * result + moveResult.hashCode();
+        return result;
+    }
 }

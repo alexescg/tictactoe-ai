@@ -24,4 +24,10 @@ public class Tree<T> {
             current = newNode;
         }
     }
+
+    public TreeNode<T> getRoot() {
+        return this.root;
+    }
+
+
 }
