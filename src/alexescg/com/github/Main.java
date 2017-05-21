@@ -28,6 +28,7 @@ public class Main {
             }
             System.out.println("Game over. Result: " + game.getState());
             ticTacToeBrain.learn(game);
+            ticTacToeBrain.resetNodePointer();
             keepPlaying = willKeepPlaying();
         }
     }
