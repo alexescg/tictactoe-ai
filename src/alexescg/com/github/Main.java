@@ -14,13 +14,11 @@ public class Main {
             TicTacToeGame game = new TicTacToeGame();
             ticTacToeBrain.setCurrentGame(game);
             while (game.getState() == GameState.PROGRESS) {
-                System.out.print("X Coordinate: ");
-                int x = scanner.nextInt();
-                System.out.print("Y Coordinate: ");
-                int y = scanner.nextInt();
-                game.markSpace(x, y);
+                Move playerMove = playerMove();
+                game.markSpace(playerMove.x, playerMove.y);
                 ticTacToeBrain.matchGameState();
                 game.printBoard();
+                
                 if (game.getState() == GameState.PROGRESS) {
                     ticTacToeBrain.makePlay();
                     game.printBoard();
@@ -28,7 +26,6 @@ public class Main {
             }
             System.out.println("Game over. Result: " + game.getState());
             ticTacToeBrain.learn(game);
-            ticTacToeBrain.resetNodePointer();
             keepPlaying = willKeepPlaying();
         }
     }
@@ -37,5 +34,13 @@ public class Main {
         System.out.print("Keep playing? y/n ");
         String answer = scanner.next();
         return answer.equals("y");
+    }
+
+    public static Move playerMove() {
+        System.out.print("X Coordinate: ");
+        int x = scanner.nextInt();
+        System.out.print("Y Coordinate: ");
+        int y = scanner.nextInt();
+        return new Move(x, y);
     }
 }

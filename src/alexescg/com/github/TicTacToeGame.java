@@ -72,7 +72,9 @@ public class TicTacToeGame {
                 move.moveResult = state;
             }
         } else {
-            throw new UnsupportedOperationException("Space not empty");
+            System.out.println("Ocupado. Casilla aleatoria");
+            Move nextMove = Main.playerMove();
+            markSpace(nextMove.x, nextMove.y);
         }
     }
 
@@ -152,7 +154,7 @@ public class TicTacToeGame {
             int first = this.board[combo[0].x][combo[0].y];
             int second = this.board[combo[1].x][combo[1].y];
             int third = this.board[combo[2].x][combo[2].y];
-            if (first == second && second == third) {
+            if (first == second && second == third && (first > 0 && second > 0 && third > 0)) {
                 if (playerTurn) {
                     return GameState.WIN;
                 } else {
